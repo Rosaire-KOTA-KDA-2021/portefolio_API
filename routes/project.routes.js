@@ -9,5 +9,6 @@ const route = express.Router();
 route.get(`/`, ProjectController.index);
 route.get(`/:id`, ProjectController.show);
 route.post(`/`, validateBody, ProjectController.create);
+route.delete(`/:id`, ProjectController.delete);
 
 module.exports = route;

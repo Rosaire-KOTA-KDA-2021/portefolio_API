@@ -6,6 +6,7 @@ class Project {
     this.subtitle = subtitle;
     this.image = image;
     this.description = description;
+    this.sqlQuery = null;
   }
   getId() {
     return this.id;
@@ -39,7 +40,8 @@ class Project {
   }
 
   static findAll(callback) {
-    db.query("SELECT * FROM project", (err, result) => {
+    this.sqlQuery = "SELECT * FROM project";
+    db.query(this.sqlQuery, (err, result) => {
       if (err) throw err;
       return callback(
         result.map(
@@ -50,31 +52,39 @@ class Project {
     });
   }
   static findById(id, callback) {
-    db.query(
-      "SELECT * FROM project WHERE id=? LIMIT 1",
-      [id],
-      (err, result) => {
-        if (err) throw err;
-        return callback(
-          result.find(
-            ({ id, title, image, subtitle, description }) =>
-              new Project(id, title, image, subtitle, description)
-          )
-        );
-      }
-    );
+    this.sqlQuery = "SELECT * FROM project WHERE id=? LIMIT 1";
+    db.query(this.sqlQuery, [id], (err, result) => {
+      if (err) throw err;
+      return callback(
+        result.find(
+          ({ id, title, image, subtitle, description }) =>
+            new Project(id, title, image, subtitle, description)
+        )
+      );
+    });
   }
   static insert({ title, image, subtitle, description }, callback) {
+    this.sqlQuery =
+      "INSERT INTO project(title, image, subtitle, description)VALUES(?,?,?,?) ";
     db.query(
-      "INSERT INTO project(title, image, subtitle, description)VALUES(?,?,?,?) ",
+      this.sqlQuery,
       [title, image, subtitle, description],
       function (err, result) {
         if (err) throw err;
-        return callback("insertion reussi avec success");
+        return callback("l'insertion reussi avec success");
       }
     );
   }
-  static update() {}
-  static delete() {}
+  static update() {
+    
+  }
+
+  static delete(id, callback) {
+    this.sqlQuery = "DELETE FROM project WHERE id = ?";
+    db.query(this.sqlQuery, [id], (err, res) => {
+      if (err) throw err;
+      return callback("la suppression reussi avec success");
+    });
+  }
 }
 module.exports = Project;

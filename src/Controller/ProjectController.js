@@ -19,7 +19,11 @@ class ProjectController {
     });
   }
   static update(request, response) {}
-  static delete(request, response) {}
+  static delete(request, response) {
+    Project.delete(request.params.id, (message) => {
+      response.send(message);
+    });
+  }
 }
 
 module.exports = ProjectController;
