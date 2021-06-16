@@ -75,8 +75,22 @@ class Project {
       }
     );
   }
-  static update() {
-    
+  static update(id, { title, image, subtitle, description }, callback) {
+    this.sqlQuery =
+      "UPDATE project SET title=?, image=?, subtitle=?, description=? WHERE id = ?";
+    db.query(
+      this.sqlQuery,
+      [id, title, image, subtitle, description],
+      (err, result) => {
+        if (err) throw err;
+        return callback(
+          result.find(
+            ({ title, image, subtitle, description }) =>
+              new Project(title, image, subtitle, description)
+          )
+        );
+      }
+    );
   }
 
   static delete(id, callback) {
