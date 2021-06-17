@@ -80,15 +80,10 @@ class Project {
       "UPDATE project SET title=?, image=?, subtitle=?, description=? WHERE id = ?";
     db.query(
       this.sqlQuery,
-      [id, title, image, subtitle, description],
+      [title, image, subtitle, description, id],
       (err, result) => {
         if (err) throw err;
-        return callback(
-          result.find(
-            ({ title, image, subtitle, description }) =>
-              new Project(title, image, subtitle, description)
-          )
-        );
+        return callback({ id: 1, title, image, subtitle, description });
       }
     );
   }

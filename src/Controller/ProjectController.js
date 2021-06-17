@@ -19,11 +19,11 @@ class ProjectController {
     });
   }
   static update(request, response) {
-    Project.delete(request.id, request.body, (project) => {
-      response.send(project);
+    Project.update(request.id, request.body, (message) => {
+      response.send(message);
     });
   }
-  static delete(request, response) {
+  static destroy(request, response) {
     Project.delete(request.params.id, (message) => {
       response.send(message);
     });

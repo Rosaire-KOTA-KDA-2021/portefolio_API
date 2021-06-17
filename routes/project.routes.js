@@ -10,6 +10,6 @@ route.get(`/`, ProjectController.index);
 route.get(`/:id`, ProjectController.show);
 route.post(`/`, validateBody, ProjectController.create);
 route.put(`/:id`, ProjectController.update);
-route.delete(`/:id`, ProjectController.delete);
+route.delete(`/:id`, ProjectController.destroy);
 
 module.exports = route;
