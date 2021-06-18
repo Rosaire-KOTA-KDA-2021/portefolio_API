@@ -1,11 +1,12 @@
-const Project = require("../Entity/Project");
-const { db } = require("../../config/database");
+
+const Project = require("../Model/Project");
+
 class ProjectController {
-  static index = (request, response) => {
+  static index(request, response) {
     Project.findAll((projects) => {
       response.send(projects);
     });
-  };
+  }
 
   static show(request, response) {
     Project.findById(request.params.id, (project) => {
@@ -19,7 +20,7 @@ class ProjectController {
     });
   }
   static update(request, response) {
-    Project.update(request.id, request.body, (message) => {
+    Project.update(request.params.id, request.body, (message) => {
       response.send(message);
     });
   }

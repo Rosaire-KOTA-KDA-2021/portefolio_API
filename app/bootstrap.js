@@ -10,7 +10,6 @@ app.use(`${process.env.BASE_URI}`, projectsRouter);
 
 const PORT_PATH = 3400 | process.env.PORT;
 
-
 app.listen(PORT_PATH, () => {
   console.log("Lancer le serveur sur: ", `http://localhost:${PORT_PATH}`);
 });

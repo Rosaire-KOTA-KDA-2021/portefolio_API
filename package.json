@@ -4,7 +4,16 @@
   "description": "ceci est une api qui permet de gerer mon portefolio",
   "main": "Bootstrap/index.js",
   "scripts": {
-    "start": "nodemon app/bootstrap.js"
+    "start": "nodemon app/bootstrap.js",
+    "babel-version": "babel --version",
+    "build": "babel src --out-dir dist",
+    "test": "jest --coverage",
+    "prettier": "prettier --ignore-path .gitignore --write \"**/*.+(js|jsx|ts|tsx|json)\"",
+    "format": "npm run prettier -- --write",
+    "check-format": "npm run prettier -- --list-different",
+    "lint": "eslint --ignore-path .gitignore --ext .js,.jsx,.ts,.tsx .",
+    "validate": "npm-run-all --parallel check-format lint build",
+    "husky-install": "husky install"
   },
   "author": "rkota",
   "license": "MIT",
@@ -14,5 +23,16 @@
     "express": "^4.17.1",
     "mysql": "github:mysqljs/mysql",
     "nodemon": "^2.0.7"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.14.5",
+    "@babel/core": "^7.14.6",
+    "@babel/preset-env": "^7.14.5",
+    "eslint": "^7.28.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-jest": "^24.3.6",
+    "husky": "^6.0.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.3.1"
   }
 }

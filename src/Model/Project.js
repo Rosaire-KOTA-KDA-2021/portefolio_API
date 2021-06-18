@@ -1,10 +1,10 @@
 const { db } = require("../../config/database");
 class Project {
-  constructor(id, title, subtitle, image, description, github_link) {
+  constructor(id, title, image, used_technologies, description, github_link) {
     this.id = id;
     this.title = title;
-    this.subtitle = subtitle;
     this.image = image;
+    this.used_technologies = used_technologies;
     this.description = description;
     this.github_link = github_link;
     this.sqlQuery = null;
@@ -15,7 +15,7 @@ class Project {
   setId(id) {
     this.id = id;
   }
-  setImage(image = null) {
+  setImage(image) {
     this.image = image;
   }
   getImage() {
@@ -27,11 +27,11 @@ class Project {
   setTitle(title) {
     this.title = title;
   }
-  getSubTitle() {
-    return this.subtitle;
+  getused_technologies() {
+    return this.used_technologies;
   }
-  setSubTitle(subtitle) {
-    this.subtitle = subtitle;
+  setused_technologies(used_technologies) {
+    this.used_technologies = used_technologies;
   }
   getDescription() {
     return this.description;
@@ -51,8 +51,15 @@ class Project {
       if (err) throw err;
       return callback(
         result.map(
-          ({ id, title, image, subtitle, description, github_link }) =>
-            new Project(id, title, image, subtitle, description, github_link)
+          ({ id, title, image, used_technologies, description, github_link }) =>
+            new Project(
+              id,
+              title,
+              image,
+              used_technologies,
+              description,
+              github_link
+            )
         )
       );
     });
@@ -63,49 +70,58 @@ class Project {
       if (err) throw err;
       return callback(
         result.find(
-          ({ id, title, image, subtitle, description, github_link }) =>
-            new Project(id, title, image, subtitle, description, github_link)
+          ({ id, title, image, used_technologies, description, github_link }) =>
+            new Project(
+              id,
+              title,
+              image,
+              used_technologies,
+              description,
+              github_link
+            )
         )
       );
     });
   }
   static insert(
-    { title, image, subtitle, description, github_link },
+    { title, image, used_technologies, description, github_link },
     callback
   ) {
     this.sqlQuery =
-      "INSERT INTO project(title, image, subtitle, description)VALUES(?,?,?,?) ";
+      "INSERT INTO project(title, image, used_technologies, description,github_link )VALUES(?,?,?,?,?) ";
     db.query(
       this.sqlQuery,
-      [title, image, subtitle, description, github_link],
+      [title, image, used_technologies, description, github_link],
       function (err, result) {
+        result = "l'insertion reussi avec succèss";
         if (err) throw err;
-        return callback("l'insertion reussi avec success");
+        return callback(result);
       }
     );
   }
   static update(
     id,
-    { title, image, subtitle, description, github_link },
+    { title, image, used_technologies, description, github_link },
     callback
   ) {
     this.sqlQuery =
-      "UPDATE project SET title=?, image=?, subtitle=?, description=? WHERE id = ?";
+      "UPDATE project SET title=?, image=?, used_technologies=?, description=?,github_link =? WHERE id = ?";
     db.query(
       this.sqlQuery,
-      [title, image, subtitle, description, github_link, id],
+      [title, image, used_technologies, description, github_link, id],
       (err, result) => {
+        result = "Mise à jour effectuée avec succèss !";
         if (err) throw err;
-        return callback({ id: 1, title, image, subtitle, description });
+        return callback(result);
       }
     );
   }
 
   static delete(id, callback) {
     this.sqlQuery = "DELETE FROM project WHERE id = ?";
-    db.query(this.sqlQuery, [id], (err, res) => {
+    db.query(this.sqlQuery, [id], (err, result) => {
       if (err) throw err;
-      return callback("la suppression reussi avec success");
+      return callback(result + "la suppression reussi avec succèss");
     });
   }
 }

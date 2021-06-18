@@ -7,9 +7,9 @@ const { checkIfProjectsExist } = require("../src/Middlewares/index");
 const route = express.Router();
 
 route.get(`/`, ProjectController.index);
-route.get(`/:id`, ProjectController.show);
+route.get(`/:id`, checkIfProjectsExist, ProjectController.show);
 route.post(`/`, validateBody, ProjectController.create);
-route.put(`/:id`, ProjectController.update);
-route.delete(`/:id`, ProjectController.destroy);
+route.put(`/:id`, checkIfProjectsExist, ProjectController.update);
+route.delete(`/:id`, checkIfProjectsExist, ProjectController.destroy);
 
 module.exports = route;
