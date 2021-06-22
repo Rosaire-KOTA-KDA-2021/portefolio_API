@@ -13,7 +13,9 @@
       "eslint:recommended",
       "eslint-config-prettier"
     ],
-  
+    // "rules": {
+    //   "strict": [ "false", "never"]
+    // },
     "overrides": [
       {
         "files": [
