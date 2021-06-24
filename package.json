@@ -1,8 +1,8 @@
 {
   "name": "api-portefolio",
   "version": "1.0.0",
-  "description": "ceci est une api qui permet de gerer mon portefolio",
-  "main": "Bootstrap/index.js",
+  "description": "ceci est une api qui permet de gerer mon portofolio",
+  "main": "app/bootstrap.js",
   "scripts": {
     "start": "nodemon app/bootstrap.js",
     "babel-version": "babel --version",

@@ -4,12 +4,12 @@ const ProjectController = require("../src/Controller/ProjectController");
 const { validateBody } = require("../src/Middlewares/index");
 const { checkIfProjectsExist } = require("../src/Middlewares/index");
 
-const route = express.Router();
+const router = express.Router();
 
-route.get(`/`, ProjectController.index);
-route.get(`/:id`, checkIfProjectsExist, ProjectController.show);
-route.post(`/`, validateBody, ProjectController.create);
-route.put(`/:id`, checkIfProjectsExist, ProjectController.update);
-route.delete(`/:id`, checkIfProjectsExist, ProjectController.destroy);
+router.get(`/`, ProjectController.index);
+router.post(`/`, validateBody, ProjectController.create);
+router.get(`/:id`, checkIfProjectsExist, ProjectController.show);
+router.put(`/:id`, checkIfProjectsExist, ProjectController.update);
+router.delete(`/:id`, checkIfProjectsExist, ProjectController.destroy);
 
-module.exports = route;
+module.exports = router;
