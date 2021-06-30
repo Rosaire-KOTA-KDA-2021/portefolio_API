@@ -9,13 +9,13 @@ app.use(express.json());
 app.use(cors());
 
 const BASE_URI = "/api/projects";
-const PORT_PATH = 5000 | process.env.PORT;
+let PORT_PATH = 5000 | process.env.PORT;
 
 db.connect((err) => {
   if (err) console.log("erreur de connexion");
 
   app.listen(PORT_PATH, () => {
-    console.log("Lancer le serveur sur: ", `http://localhost:${PORT_PATH}`);
+    console.log("Lancer le serveur sur: ", `${PORT_PATH}`);
   });
 });
 
