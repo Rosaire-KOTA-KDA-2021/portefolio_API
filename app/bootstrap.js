@@ -8,6 +8,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+const BASE_URI = "/api/projects";
 const PORT_PATH = 5000 | process.env.PORT;
 
 db.connect((err) => {
@@ -19,7 +20,7 @@ db.connect((err) => {
 });
 
 app.get("/", (req, res) => {
-  res.redirect(`${process.env.BASE_URI}`);
+  res.redirect(`${BASE_URI}`);
 });
 
 app.use(`${process.env.BASE_URI}`, projectsRouter);
