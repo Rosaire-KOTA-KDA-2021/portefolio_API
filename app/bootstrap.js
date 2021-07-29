@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(cors());
 
 const BASE_URI = "/api/projects";
-let PORT_PATH = 3000 || process.env.PORT;
+let PORT_PATH = process.env.PORT || 5000;
 
 db.connect((err) => {
   if (err) {
