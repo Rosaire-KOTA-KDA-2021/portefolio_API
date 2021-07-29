@@ -12,15 +12,18 @@ const BASE_URI = "/api/projects";
 let PORT_PATH = 5000 || process.env.PORT;
 
 db.connect((err) => {
-  if (err) console.log("erreur de connexion");
-
-  app.listen(PORT_PATH, () => {
-    console.log("Lancer le serveur sur: ", `${PORT_PATH}`);
-  });
+  if (err) {
+    console.log("erreur de connexion");
+  } else {
+    console.log("connexion esimbi");
+    app.listen(PORT_PATH, () => {
+      console.log("Lancer le serveur sur: ", `http://localhost:${PORT_PATH}`);
+    });
+  }
 });
 
 app.get("/", (req, res) => {
   res.redirect(`${BASE_URI}`);
 });
 
-app.use(`${process.env.BASE_URI}`, projectsRouter);
+app.use(`${BASE_URI}`, projectsRouter);
