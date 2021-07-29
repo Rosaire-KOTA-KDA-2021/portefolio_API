@@ -4,7 +4,7 @@
   "description": "ceci est une api qui permet de gerer mon portofolio",
   "main": "app/bootstrap.js",
   "scripts": {
-    "start": "nodemon app/bootstrap.js",
+    "start": "node app/bootstrap.js",
     "babel-version": "babel --version",
     "build": "babel src --out-dir dist",
     "test": "jest --coverage",

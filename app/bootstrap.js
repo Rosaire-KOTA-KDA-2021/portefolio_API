@@ -17,7 +17,7 @@ db.connect((err) => {
   } else {
     console.log("connexion esimbi");
     app.listen(PORT_PATH, () => {
-      console.log("Lancer le serveur sur: ", `http://localhost:${PORT_PATH}`);
+      console.log("Lancer le serveur sur: ", `${PORT_PATH}`);
     });
   }
 });
