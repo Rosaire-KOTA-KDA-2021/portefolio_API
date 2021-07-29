@@ -6,5 +6,5 @@ var checkIfProjectsExist = require("./check.project");
 
 module.exports = {
   validateBody: validateBody,
-  checkIfProjectsExist: checkIfProjectsExist
+  checkIfProjectsExist: checkIfProjectsExist,
 };
